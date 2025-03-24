@@ -1,24 +1,3 @@
-#############################################################
-# get-windows-activation-keys.ps1
-# 
-# Purpose: Extract Windows activation keys from multiple sources
-#          including registry, WMI, and firmware-embedded keys.
-#          The script identifies and decodes product keys from
-#          various locations where Windows stores activation
-#          information.
-#
-# Usage: Run the script with administrative privileges
-#        .\get-windows-activation-keys.ps1
-#
-# Note: The script will pause at the end. Press Enter to close the window.
-#
-# Sources used:
-# - Registry: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion
-# - Registry: HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform
-# - Registry: HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation
-# - WMI: SoftwareLicensingService class
-#############################################################
-
 # Check if running as administrator
 function Test-Admin {
     $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
