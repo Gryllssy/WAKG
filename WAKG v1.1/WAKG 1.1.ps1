@@ -5,20 +5,6 @@ function Test-Admin {
     return $isAdmin
 }
 
-# Display a warning if not running as administrator
-if (-not (Test-Admin)) {
-    Write-Warning "This script may not retrieve all keys without administrative privileges."
-    Write-Warning "Consider rerunning as Administrator for complete results."
-    Write-Host ""
-}
-
-# Your script code continues here with admin privileges
-Write-Host "Script is running with administrator privileges!" -ForegroundColor Green
-
-# Function to decode a Windows product key from the registry binary data
-# This decoding algorithm works with both the DigitalProductId and DigitalProductId4 values
-# Microsoft stores product keys in an encoded binary format to prevent simple extraction
-# The algorithm below reverses the encoding to reveal the actual 25-character product key
 function Get-WindowsProductKey {
     param (
         [byte[]]$DigitalProductId
@@ -31,9 +17,6 @@ function Get-WindowsProductKey {
     
     # Define the charset for the product key
     $keyChars = "BCDFGHJKMPQRTVWXY2346789"
-    
-    # Starting with Windows 8, the encoding algorithm changed
-    # This algorithm works for both pre-Windows 8 and Windows 8+
     
     # Last 8 bytes are used in decoding
     $keyStartIndex = 52
@@ -60,7 +43,6 @@ function Get-WindowsProductKey {
     return $key
 }
 
-# Function to get product name from registry
 # Retrieves the Windows version name from the registry at:
 # HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProductName
 function Get-WindowsProductName {
@@ -249,7 +231,6 @@ Get-AllWindowsKeys
 # Keep the window open until the user presses Enter
 Write-Host "`nPress Enter to close this window..." -ForegroundColor Yellow
 
-# Robust pause mechanism that works regardless of how the script is launched
 # Check if script is running in ISE or console host
 $isConsoleHost = $Host.Name -eq "ConsoleHost"
 $isISE = $Host.Name -eq "Windows PowerShell ISE Host"
